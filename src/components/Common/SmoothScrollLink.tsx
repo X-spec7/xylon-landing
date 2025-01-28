@@ -27,7 +27,7 @@ const SmoothScrollLink: React.FC<SmoothScrollLinkProps> = ({ menuItem }) => {
       href="/"
       onClick={handleClick}
       passHref
-      className="flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
+      className="flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 text-white/50 hover:text-white"
     >
       {menuItem.title}
     </Link>

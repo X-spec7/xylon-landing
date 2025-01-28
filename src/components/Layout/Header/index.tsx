@@ -102,9 +102,9 @@ const Header = () => {
                           ? <SmoothScrollLink menuItem={menuItem} />
                           : <Link
                             href={menuItem.path}
-                            className={`flex py-2 text-xs lg:mr-0 lg:inline-flex font-semibold lg:px-0 lg:py-6 ${usePathName === menuItem.path
-                              ? "text-primary dark:text-white"
-                              : "text-dark hover:text-primary dark:text-white/70 dark:hover:text-white"
+                            className={`flex py-2 text-xs lg:mr-0 lg:inline-flex font-semibold lg:px-0 lg:py-6 text-white ${usePathName === menuItem.path
+                              ? "text-white"
+                              : "text-white"
                               }`}
                           >
                             {menuItem.title}
@@ -114,7 +114,7 @@ const Header = () => {
                         <>
                           <p
                             onClick={() => handleSubmenu(index)}
-                            className="flex cursor-pointer items-center justify-between py-2 text-sm text-dark group-hover:text-primary dark:text-white/70 dark:group-hover:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
+                            className="flex cursor-pointer items-center justify-between py-2 text-sm text-white/70 group-hover:text-white lg:mr-0 lg:inline-flex lg:px-0 lg:py-6"
                           >
                             {menuItem.title}
                             <span className="pl-1 lg:pl-3">
