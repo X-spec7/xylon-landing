@@ -54,7 +54,7 @@ export default function RootLayout({
             className="z-10 w-full h-screen bg-cover bg-center overflow-auto no-scrollbar"
           >
             {children}
-            <Footer />
+            <Footer lng={lng} />
           </div>
         </Providers>
       </body>
