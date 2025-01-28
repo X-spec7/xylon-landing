@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import { useState } from "react"
 import Image from "next/image"
 
@@ -9,17 +9,22 @@ import mainPageMenuData from "./mainPageMenuData"
 import { checkScrollUrl } from "@/util/helper"
 import { SmoothScrollLink } from "@/components/Common"
 import { ISectionProps } from "@/types"
+import { languages } from "@/app/i18n/settings"
 
 const Header: React.FC<ISectionProps> = ({ lng }) => {
 
   const [navbarOpen, setNavbarOpen] = useState(false)
+  const [languageDropdownOpen, setLanguageDropdownOpen] = useState(false)
 
   const navbarToggleHandler = () => {
     setNavbarOpen(!navbarOpen)
   }
 
-  const sticky = true
+  const router = useRouter()
+  const pathname = usePathname()
 
+  const sticky = true
+  
   const [openIndex, setOpenIndex] = useState(-1)
   const handleSubmenu = (index) => {
     if (openIndex === index) {
@@ -28,8 +33,14 @@ const Header: React.FC<ISectionProps> = ({ lng }) => {
       setOpenIndex(index)
     }
   }
-
-  const usePathName = usePathname()
+  
+  const handleLanguageChange = (lang: string) => {
+    setLanguageDropdownOpen(false)
+    router.push(`/${lang}`)
+  }
+  const handleLanguageDropdownClicked = () => {
+    setLanguageDropdownOpen((prev) => !prev)
+  }
 
   return (
     <>
@@ -90,7 +101,7 @@ const Header: React.FC<ISectionProps> = ({ lng }) => {
                           ? <SmoothScrollLink menuItem={menuItem} lng={lng} />
                           : <Link
                             href={menuItem.path}
-                            className={`flex py-2 text-xs lg:mr-0 lg:inline-flex font-semibold lg:px-0 lg:py-6 text-white ${usePathName === menuItem.path
+                            className={`flex py-2 text-xs lg:mr-0 lg:inline-flex font-semibold lg:px-0 lg:py-6 text-white ${pathname === menuItem.path
                               ? "text-white"
                               : "text-white"
                               }`}
@@ -123,6 +134,47 @@ const Header: React.FC<ISectionProps> = ({ lng }) => {
                 </ul>
               </nav>
               {/* Language selection dropdown button */}
+              <div className="relative ml-16">
+                <button
+                  className="flex items-center gap-2 px-3 py-2 text-sm text-white bg-gray-700 rounded-lg hover:bg-gray-600 focus:ring-2 focus:ring-white/70"
+                  id="languageDropdownButton"
+                  onClick={handleLanguageDropdownClicked}
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {lng.toUpperCase()}
+                  <svg
+                    className="w-4 h-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <ul
+                  className={`absolute mt-2 rounded-md bg-white shadow-lg w-full ${
+                    languageDropdownOpen ? "flex flex-col items-center justify-center"
+                    : "hidden"
+                  }`}
+                  id="languageDropdown"
+                >
+                  {languages.map((lang, index) => (
+                    <li key={lang}>
+                      <button
+                        className={`block w-full px-4 py-2 text-left text-sm text-black ${
+                          index + 1 < languages.length ? "border-b border-black/50"
+                          : ""
+                        }`}
+                        onClick={() => handleLanguageChange(lang)}
+                      >
+                        {lang}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
