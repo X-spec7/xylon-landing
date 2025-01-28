@@ -17,10 +17,15 @@ export default function RootLayout({
     <html suppressHydrationWarning lang="en">
       <head />
 
-      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
+      <body className={`bg-[#FCFCFC] ${inter.className}`}>
         <Providers>
-          <div className="w-full h-screen overflow-auto">
-            <Header />
+          <Header />
+          <div
+            style={{
+              backgroundImage: "url('/images/bg.jpg')",
+            }}
+            className="z-10 w-full h-screen bg-cover bg-center overflow-auto no-scrollbar"
+          >
             {children}
             <Footer />
           </div>

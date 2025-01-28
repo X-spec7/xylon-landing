@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require("tailwindcss/colors");
+const colors = require("tailwindcss/colors")
 
 module.exports = {
   content: [
@@ -34,6 +34,11 @@ module.exports = {
       // => @media (min-width: 1400px) { ... }
     },
     extend: {
+      textShadow: {
+        sm: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+        DEFAULT: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+        lg: '3px 3px 6px rgba(0, 0, 0, 0.6)',
+      },
       colors: {
         current: "currentColor",
         transparent: "transparent",
@@ -239,5 +244,24 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.text-shadow-sm': {
+          textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+        },
+        '.text-shadow': {
+          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+        },
+        '.text-shadow-lg': {
+          textShadow: '3px 3px 6px rgba(0, 0, 0, 0.6)',
+        },
+        '.text-shadow-none': {
+          textShadow: 'none',
+        },
+      };
+
+      addUtilities(newUtilities, ['responsive', 'hover']);
+    },
+  ],
 };
