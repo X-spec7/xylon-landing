@@ -1,6 +1,15 @@
+"use client"
+
+import { useTranslation } from "@/app/i18n/client"
+import { fallbackLng, languages } from "@/app/i18n/settings"
+import { ISectionProps } from "@/types"
 import { FeatureCard } from "@/components/Common"
 
-const About = () => {
+const About: React.FC<ISectionProps> = ({ lng }) => {
+  if (languages.indexOf(lng) < 0) lng = fallbackLng
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useTranslation(lng, "about")
+
   return (
     <section
       id="about"
@@ -8,9 +17,9 @@ const About = () => {
     >
       <div className="container mx-auto max-w-7xl text-center">
         {/* Section Heading */}
-        <h2 className="text-6xl lg:text-4xl font-bold mb-6">About Xylon</h2>
+        <h2 className="text-6xl lg:text-4xl font-bold mb-6">{t("about.title")}</h2>
         <p className="text-lg max-w-4xl mx-auto">
-          Xylon is dedicated to transforming sustainability through innovative tools and technologies. By offering solutions that enable real-world impact, Xylon empowers individuals and organizations to contribute to a more sustainable planet.
+          {t("about.description")}
         </p>
       </div>
 
@@ -18,13 +27,13 @@ const About = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
         <FeatureCard
           icon="🌍"
-          title="Carbon Reduction"
-          description="Xylon delivers tools to measure, monitor, and actively reduce your carbon footprint for a greener tomorrow."
+          title={t("about.carbon.title")}
+          description={t("about.carbon.description")}
         />
         <FeatureCard
           icon="⚡"
-          title="Energy Efficiency"
-          description="Our innovative solutions help improve energy utilization, enhancing efficiency while reducing waste."
+          title={t("about.energy.title")}
+          description={t("about.energy.description")}
         />
       </div>
     </section>

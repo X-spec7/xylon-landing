@@ -1,8 +1,14 @@
 "use client"
+import { ISectionProps } from "@/types"
+import { languages, fallbackLng } from "@/app/i18n/settings"
+import { useTranslation } from "@/app/i18n/client"
+import { useState } from "react"
 
-import { useState } from "react";
+const FAQ: React.FC<ISectionProps> = ({ lng }) => {
+  if (languages.indexOf(lng) < 0) lng = fallbackLng
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useTranslation(lng, "faq")
 
-const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleAccordion = (index) => {
@@ -11,24 +17,24 @@ const FAQ = () => {
 
   const faqs = [
     {
-      question: "What is Xylon?",
+      question: `${t("faq1.question")}`,
       answer:
-        "Xylon is a platform that leverages advanced technologies to redefine sustainability, empowering users to make meaningful contributions toward a greener planet.",
+        `${t("faq1.answer")}`,
     },
     {
-      question: "How does Xylon drive energy efficiency?",
+      question: `${t("faq2.question")}`,
       answer:
-        "Our solutions focus on optimizing energy use and encouraging sustainable practices through actionable insights and measurable progress.",
+        `${t("faq2.answer")}`,
     },
     {
-      question: "Who can benefit from Xylon's solutions?",
+      question: `${t("faq3.question")}`,
       answer:
-        "Individuals, businesses, and communities seeking scalable and impactful tools for sustainability can benefit from Xylon's offerings.",
+        `${t("faq3.answer")}`,
     },
     {
-      question: "What makes Xylon's approach unique?",
+      question: `${t("faq4.question")}`,
       answer:
-        "Xylon prioritizes efficiency, scalability, and real-world impact, ensuring that sustainability is accessible and achievable for all.",
+        `${t("faq4.answer")}`,
     },
   ];
 
@@ -39,9 +45,9 @@ const FAQ = () => {
     >
       <div className="container mx-auto max-w-7xl text-center">
         {/* Section Heading */}
-        <h2 className="text-4xl lg:text-4xl font-bold mb-6">FAQs</h2>
+        <h2 className="text-4xl lg:text-4xl font-bold mb-6">{t("faq.title")}</h2>
         <p className="text-lg max-w-4xl mx-auto mb-12">
-          Have questions about Xylon? We’ve got answers.
+          {t("faq.description")}
         </p>
 
         {/* Accordion */}

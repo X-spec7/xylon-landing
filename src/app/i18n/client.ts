@@ -11,6 +11,8 @@ import { getOptions, languages, cookieName } from './settings'
 
 const runsOnServerSide = typeof window === 'undefined'
 
+console.log("initializing")
+
 // on client side the normal singleton is ok
 i18next
   .use(initReactI18next)
@@ -25,6 +27,12 @@ i18next
     },
     preload: runsOnServerSide ? languages : []
   })
+  .then(() => {
+    console.log("i18next initialized:", i18next.isInitialized); // should now log `true`
+  })
+  .catch((err) => {
+    console.error("i18next initialization failed:", err);
+  });
 
 export function useTranslation<
   Ns extends FlatNamespace,

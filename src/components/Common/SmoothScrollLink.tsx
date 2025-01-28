@@ -1,7 +1,7 @@
 "use client"
 
 import Link from 'next/link'
-import { Menu } from "@/types/menu"
+import { Menu } from "@/types"
 import { usePathname } from "next/navigation"
 
 interface SmoothScrollLinkProps {

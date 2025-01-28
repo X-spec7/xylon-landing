@@ -1,4 +1,15 @@
-const Contact = () => {
+"use client"
+
+import { ISectionProps } from "@/types"
+import { languages, fallbackLng } from "@/app/i18n/settings"
+import { useTranslation } from "@/app/i18n/client"
+
+const Contact: React.FC<ISectionProps> = ({ lng }) => {
+
+  if (languages.indexOf(lng) < 0) lng = fallbackLng
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useTranslation(lng, "contact")
+
   return (
     <section
       id="contact"
@@ -6,16 +17,16 @@ const Contact = () => {
     >
       <div className="container mx-auto max-w-4xl text-center">
         {/* Section Heading */}
-        <h2 className="text-4xl lg:text-4xl font-bold mb-6">Contact Us</h2>
+        <h2 className="text-4xl lg:text-4xl font-bold mb-6">{t("contact.title")}</h2>
         <p className="text-lg mb-10">
-          Have questions or want to collaborate? Get in touch with us at{" "}
+          {t("contact.description1")}{" "}
           <a
             href="mailto:info@xylon.dev"
             className="underline hover:text-teal-400"
           >
             info@xylon.dev
           </a>{" "}
-          or use the form below.
+          {t("contact.description2")}
         </p>
 
         {/* Contact Form */}
@@ -23,7 +34,7 @@ const Contact = () => {
           {/* Name Input */}
           <div>
             <label htmlFor="name" className="block text-sm font-medium mb-1">
-              Name
+              {t("contact.form.name")}
             </label>
             <input
               type="text"
@@ -38,7 +49,7 @@ const Contact = () => {
           {/* Email Input */}
           <div>
             <label htmlFor="email" className="block text-sm font-medium mb-1">
-              Email
+              {[t("contact.form.email")]}
             </label>
             <input
               type="email"
@@ -53,7 +64,7 @@ const Contact = () => {
           {/* Message Input */}
           <div>
             <label htmlFor="message" className="block text-sm font-medium mb-1">
-              Message
+              {t("contact.form.message")}
             </label>
             <textarea
               id="message"
@@ -70,7 +81,7 @@ const Contact = () => {
             type="submit"
             className="w-full py-3 rounded-lg bg-teal-500 hover:bg-teal-400 text-white text-lg font-medium shadow-lg transition duration-200"
           >
-            Send Message
+            {t("contact.form.button")}
           </button>
         </form>
       </div>
