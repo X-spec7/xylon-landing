@@ -4,7 +4,7 @@ const Solutions = () => {
   return (
     <section
       id="solutions"
-      className="relative z-10 h-screen flex flex-col justify-center items-center gap-10 overflow-hidden text-shadow-lg text-white bg-black/50 border-b border-white/40"
+      className="relative z-10 h-auto py-16 flex flex-col justify-center items-center gap-10 overflow-hidden text-shadow-lg text-white bg-black/50 border-b border-white/40"
     >
       <div className="container mx-auto max-w-7xl text-center">
         {/* Section Heading */}
@@ -20,7 +20,7 @@ const Solutions = () => {
       </div>
 
       {/* Solutions List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-16">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mt-16">
         <FeatureCard
           icon="🌱"
           title="EMS-1: Comprehensive Energy Optimization"
@@ -39,9 +39,23 @@ const Solutions = () => {
             way to adopt sustainable practices, ensuring broad accessibility
             without sacrificing impact."
         />
+        <FeatureCard
+          icon="🔥"
+          title="Xylon Heating System"
+          description="Xylon is a revolutionary heating system that rewards users for
+            savings achieved and environmental contributions. Surpassing
+            traditional heating technologies, it offers exceptional efficiency
+            and operates entirely on solar energy in some regions. The system
+            provides home heating, water heating, and cryptocurrency generation,
+            delivering unmatched energy efficiency and emission reductions. Its
+            cryptocurrency value is determined by system efficiency and saved
+            carbon emissions, ensuring transparency and sustainability. Xylon is
+            the ideal choice for households and organizations seeking innovation,
+            environmental friendliness, and financial benefit in one solution."
+        />
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Solutions;
+export default Solutions
