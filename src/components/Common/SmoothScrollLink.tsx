@@ -1,26 +1,26 @@
-"use client";
+"use client"
 
-import Link from 'next/link';
-import { Menu } from "@/types/menu";
-import { usePathname } from "next/navigation";
+import Link from 'next/link'
+import { Menu } from "@/types/menu"
+import { usePathname } from "next/navigation"
 
 interface SmoothScrollLinkProps {
-  menuItem: Menu;
+  menuItem: Menu
 }
 
 const SmoothScrollLink: React.FC<SmoothScrollLinkProps> = ({ menuItem }) => {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   const handleClick = (e) => {
     if (pathname === "/") {
-      e.preventDefault();
-      document.querySelector(menuItem.path)?.scrollIntoView({ behavior: 'smooth' });
+      e.preventDefault()
+      document.querySelector(menuItem.path)?.scrollIntoView({ behavior: 'smooth' })
     } else {
       setTimeout(() => {
-        document.querySelector(menuItem.path)?.scrollIntoView({ behavior: 'smooth' });
-      }, 200);
+        document.querySelector(menuItem.path)?.scrollIntoView({ behavior: 'smooth' })
+      }, 200)
     }
-  };
+  }
 
   return (
     <Link
@@ -31,7 +31,7 @@ const SmoothScrollLink: React.FC<SmoothScrollLinkProps> = ({ menuItem }) => {
     >
       {menuItem.title}
     </Link>
-  );
-};
+  )
+}
 
-export default SmoothScrollLink;
+export default SmoothScrollLink

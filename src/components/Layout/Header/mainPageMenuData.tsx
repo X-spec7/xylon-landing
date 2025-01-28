@@ -3,38 +3,32 @@ import { Menu } from "@/types/menu";
 const mainPageMenuData: Menu[] = [
   {
     id: 1,
-    title: "DASHBOARD",
-    path: "#",
+    title: "HOME",
+    path: "#home",
     newTab: false,
   },
   {
     id: 2,
-    title: "ACCOUNTS",
-    path: "#",
+    title: "ABOUT",
+    path: "#about",
     newTab: false,
   },
   {
     id: 3,
-    title: "WALLET",
-    path: "#",
+    title: "SOLUTIONS",
+    path: "#solutions",
     newTab: false,
   },
   {
     id: 4,
-    title: "ORDERS",
-    path: "#",
+    title: "FAQ",
+    path: "#faq",
     newTab: false,
   },
   {
     id: 5,
-    title: "TASKS",
-    path: "#",
-    newTab: false,
-  },
-  {
-    id: 6,
-    title: "MANAGE",
-    path: "#",
+    title: "Contact",
+    path: "#contact",
     newTab: false,
   },
 ];

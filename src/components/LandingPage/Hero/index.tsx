@@ -2,7 +2,7 @@ const Hero = () => {
   return (
     <>
       <section
-        id="hero"
+        id="home"
         className="relative z-10 overflow-hidden h-screen border-b border-gray-200 text-shadow-lg bg-black/10"
       >
         <div className="flex flex-col justify-center items-center w-full h-full bg-black/50">
