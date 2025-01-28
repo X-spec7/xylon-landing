@@ -1,14 +1,23 @@
 "use client"
 
+import { useTranslation } from "@/app/i18n/client"
+import { fallbackLng, languages } from "@/app/i18n/settings"
+
 import Link from 'next/link'
-import { Menu } from "@/types"
+import { IMenu } from "@/types"
 import { usePathname } from "next/navigation"
 
 interface SmoothScrollLinkProps {
-  menuItem: Menu
+  menuItem: IMenu
+  lng: string
 }
 
-const SmoothScrollLink: React.FC<SmoothScrollLinkProps> = ({ menuItem }) => {
+const SmoothScrollLink: React.FC<SmoothScrollLinkProps> = ({ menuItem, lng }) => {
+
+  if (languages.indexOf(lng) < 0) lng = fallbackLng
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const { t } = useTranslation(lng, "menu")
+
   const pathname = usePathname()
 
   const handleClick = (e) => {
@@ -29,7 +38,7 @@ const SmoothScrollLink: React.FC<SmoothScrollLinkProps> = ({ menuItem }) => {
       passHref
       className="flex py-2 text-base lg:mr-0 lg:inline-flex lg:px-0 lg:py-6 text-white/70 text-shadow-lg font-semibold hover:text-white"
     >
-      {menuItem.title}
+      {t(menuItem.title)}
     </Link>
   )
 }

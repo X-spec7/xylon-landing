@@ -46,7 +46,7 @@ export default function RootLayout({
 
       <body className={`bg-[#FCFCFC] ${inter.className}`}>
         <Providers>
-          <Header />
+          <Header lng={lng} />
           <div
             style={{
               backgroundImage: "url('/images/bg.jpg')",

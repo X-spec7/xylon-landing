@@ -1,35 +1,30 @@
-import { Menu } from "@/types";
+import { IMenu } from "@/types"
 
-const mainPageMenuData: Menu[] = [
+const mainPageMenuData: IMenu[] = [
   {
     id: 1,
-    title: "HOME",
+    title: "menu.home",
     path: "#home",
-    newTab: false,
   },
   {
     id: 2,
-    title: "ABOUT",
+    title: "menu.about",
     path: "#about",
-    newTab: false,
   },
   {
     id: 3,
-    title: "SOLUTIONS",
+    title: "menu.solutions",
     path: "#solutions",
-    newTab: false,
   },
   {
     id: 4,
-    title: "FAQ",
+    title: "menu.faq",
     path: "#faq",
-    newTab: false,
   },
   {
     id: 5,
-    title: "Contact",
+    title: "menu.contact",
     path: "#contact",
-    newTab: false,
   },
 ];
 

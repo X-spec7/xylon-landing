@@ -2,14 +2,15 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import Image from "next/image"
 
 import mainPageMenuData from "./mainPageMenuData"
 import { checkScrollUrl } from "@/util/helper"
 import { SmoothScrollLink } from "@/components/Common"
+import { ISectionProps } from "@/types"
 
-const Header = () => {
+const Header: React.FC<ISectionProps> = ({ lng }) => {
 
   const [navbarOpen, setNavbarOpen] = useState(false)
 
@@ -54,7 +55,7 @@ const Header = () => {
               </Link>
             </div>
 
-            <div>
+            <div className="flex justify-end items-center">
               <button
                 onClick={navbarToggleHandler}
                 id="navbarToggler"
@@ -86,7 +87,7 @@ const Header = () => {
                     <li key={index} className="group relative">
                       {menuItem.path ? (
                         checkScrollUrl(menuItem.path)
-                          ? <SmoothScrollLink menuItem={menuItem} />
+                          ? <SmoothScrollLink menuItem={menuItem} lng={lng} />
                           : <Link
                             href={menuItem.path}
                             className={`flex py-2 text-xs lg:mr-0 lg:inline-flex font-semibold lg:px-0 lg:py-6 text-white ${usePathName === menuItem.path
@@ -121,6 +122,7 @@ const Header = () => {
                   ))}
                 </ul>
               </nav>
+              {/* Language selection dropdown button */}
             </div>
           </div>
         </div>
