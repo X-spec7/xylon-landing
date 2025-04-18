@@ -24,7 +24,7 @@ export default async function RootLayout({
   children: React.ReactNode
   params: { lng: string }
 }) {
-  const { t } = await useTranslation(lng, "common")
+  const { t } = await useTranslation(lng, "app")
 
   return (
     <html suppressHydrationWarning lang={lng} dir={dir(lng)}>
