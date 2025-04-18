@@ -32,8 +32,8 @@ export async function generateMetadata({
   const { t } = await getTranslations(lng)
 
   return {
-    title: t("title"),
-    description: t("description"), // Changed from content to description to match metadata standard
+    title: t("app.title"),
+    description: t("app.description"), // Changed from content to description to match metadata standard
   }
 }
 
