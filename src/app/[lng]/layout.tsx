@@ -1,11 +1,13 @@
+import type React from "react"
 import { Footer, Header } from "@/components/Layout"
 import { Inter } from "next/font/google"
-import { dir } from 'i18next'
-import { useTranslation } from "../i18n"
+import { dir } from "i18next"
 import "node_modules/react-modal-video/css/modal-video.css"
 
 import { Providers } from "./providers"
 import { languages, fallbackLng } from "../i18n/settings"
+// Import the non-hook version for metadata
+import { getTranslations } from "../i18n"
 
 import "../../styles/index.css"
 
@@ -15,20 +17,23 @@ export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }))
 }
 
-export async function generateMetaData({ params }: {
+export async function generateMetadata({
+  params,
+}: {
   params: {
-    lng: string;
-  };
+    lng: string
+  }
 }) {
-  let {lng} = params
+  let { lng } = params
   if (languages.indexOf(lng) < 0) {
     lng = fallbackLng
   }
-  const { t } = await useTranslation(lng)
+  // Use getTranslations instead of useTranslation
+  const { t } = await getTranslations(lng)
 
   return {
     title: t("title"),
-    content: t("description")
+    description: t("description"), // Changed from content to description to match metadata standard
   }
 }
 
@@ -39,9 +44,8 @@ export default function RootLayout({
   children: React.ReactNode
   params: { lng: string }
 }) {
-  
   return (
-    <html suppressHydrationWarning  lang={lng} dir={dir(lng)}>
+    <html suppressHydrationWarning lang={lng} dir={dir(lng)}>
       <head />
 
       <body className={`bg-[#FCFCFC] ${inter.className}`}>

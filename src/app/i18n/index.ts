@@ -1,8 +1,8 @@
-import { createInstance, Namespace, FlatNamespace, KeyPrefix } from 'i18next'
-import resourcesToBackend from 'i18next-resources-to-backend'
-import { initReactI18next } from 'react-i18next/initReactI18next'
-import { FallbackNs } from 'react-i18next'
-import { getOptions } from './settings'
+import { createInstance, type Namespace, type FlatNamespace, type KeyPrefix } from "i18next"
+import resourcesToBackend from "i18next-resources-to-backend"
+import { initReactI18next } from "react-i18next/initReactI18next"
+import type { FallbackNs } from "react-i18next"
+import { getOptions } from "./settings"
 
 const initI18next = async (lng: string, ns: string | string[]) => {
   // on server side we create a new instance for each render, because during compilation everything seems to be executed in parallel
@@ -14,20 +14,37 @@ const initI18next = async (lng: string, ns: string | string[]) => {
   return i18nInstance
 }
 
-type $Tuple<T> = readonly [T?, ...T[]];
-type $FirstNamespace<Ns extends Namespace> = Ns extends readonly any[] ? Ns[0] : Ns;
+type $Tuple<T> = readonly [T?, ...T[]]
+type $FirstNamespace<Ns extends Namespace> = Ns extends readonly any[] ? Ns[0] : Ns
 
 export async function useTranslation<
   Ns extends FlatNamespace | $Tuple<FlatNamespace>,
-  KPrefix extends KeyPrefix<FallbackNs<Ns extends FlatNamespace ? FlatNamespace : $FirstNamespace<FlatNamespace>>> = undefined
->(
-  lng: string,
-  ns?: Ns,
-  options: { keyPrefix?: KPrefix } = {}
-) {
-  const i18nextInstance = await initI18next(lng, Array.isArray(ns) ? ns as string[] : ns as string)
+  KPrefix extends KeyPrefix<
+    FallbackNs<Ns extends FlatNamespace ? FlatNamespace : $FirstNamespace<FlatNamespace>>
+  > = undefined,
+>(lng: string, ns?: Ns, options: { keyPrefix?: KPrefix } = {}) {
+  const i18nextInstance = await initI18next(lng, Array.isArray(ns) ? (ns as string[]) : (ns as string))
   return {
-    t: Array.isArray(ns) ? i18nextInstance.getFixedT(lng, ns[0], options.keyPrefix) : i18nextInstance.getFixedT(lng, ns as FlatNamespace, options.keyPrefix),
-    i18n: i18nextInstance
+    t: Array.isArray(ns)
+      ? i18nextInstance.getFixedT(lng, ns[0], options.keyPrefix)
+      : i18nextInstance.getFixedT(lng, ns as FlatNamespace, options.keyPrefix),
+    i18n: i18nextInstance,
+  }
+}
+
+// New function for metadata and other non-React contexts
+export async function getTranslations<
+  Ns extends FlatNamespace | $Tuple<FlatNamespace>,
+  KPrefix extends KeyPrefix<
+    FallbackNs<Ns extends FlatNamespace ? FlatNamespace : $FirstNamespace<FlatNamespace>>
+  > = undefined,
+>(lng: string, ns?: Ns, options: { keyPrefix?: KPrefix } = {}) {
+  // This function is similar to useTranslation but doesn't use React hooks
+  const i18nextInstance = await initI18next(lng, Array.isArray(ns) ? (ns as string[]) : (ns as string))
+  return {
+    t: Array.isArray(ns)
+      ? i18nextInstance.getFixedT(lng, ns[0], options.keyPrefix)
+      : i18nextInstance.getFixedT(lng, ns as FlatNamespace, options.keyPrefix),
+    i18n: i18nextInstance,
   }
 }
